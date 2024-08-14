@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .gallery img {
+            max-width: 150px;
+            max-height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        {% for card in gallery_cards %}
+            <div class="card">
+                <img src="{{ card.featured_image.url }}" alt="{{ card.title }}">
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
