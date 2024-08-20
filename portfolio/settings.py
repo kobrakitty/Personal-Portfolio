@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from dotenv import load_dotenv
 from pathlib import Path
-import dj_database_url
+import dj_database_url 
+import psycopg2
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,19 +22,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
 
-# Django settings
+# Django secret key and DEBUG for deployment
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
+#Render permission and local host setup
 ALLOWED_HOSTS = ['glitterpileai.onrender.com', 'localhost', '127.0.0.1']
+
+#OpenAI key for the newsletter generation 
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
+#Google Email setup for newsletter
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # PostgreSQL Database
 DATABASES = {
-    'default': dj_database_url.config(default='postgresql://glitterpile:cSEYYGx86MOD9muaM4QEimNgL94IaPSf@dpg-cr2an1aj1k6c73ekp0kg-a.oregon-postgres.render.com/glitterpileai', conn_max_age=600)
+    'default': dj_database_url.config(default='DB_URL', conn_max_age=600)
 }
 
 # Quick-start development settings - unsuitable for production
@@ -41,8 +46,6 @@ DATABASES = {
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-
-
 
 # Application definition
 
@@ -52,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    "whitenoise.runserver_nostatic", #whitenoise takes over file handling by passing nostatic to runserver command
     'django.contrib.staticfiles',
     'home'
 ]
@@ -155,7 +159,7 @@ if not DEBUG:
    # BASE_DIR / 'media' / 'static',
 #]
 
-# Media processing
+#Media processing
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 

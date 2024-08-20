@@ -5,7 +5,7 @@ class cardentry(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=False, blank=False)
     link = models.TextField(null=False, blank=False)
-    featured_image = models.ImageField(upload_to='static/submitted', null=True, blank=True)
+    featured_image = models.ImageField(upload_to='staticfiles\explore', null=True, blank=True)
     submit_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -19,7 +19,7 @@ class gallery(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=False, blank=False)
     link = models.TextField(null=False, blank=False)
-    featured_image = models.ImageField(upload_to='photos', null=True, blank=True)
+    featured_image = models.ImageField(upload_to='staticfiles\aiart', null=True, blank=True)
     submit_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -33,7 +33,7 @@ class project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=False, blank=False)
     link = models.TextField(null=False, blank=False)
-    featured_image = models.ImageField(upload_to='project', null=True, blank=True)
+    featured_image = models.ImageField(upload_to='staticfiles\loprojects', null=True, blank=True)
     submit_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
