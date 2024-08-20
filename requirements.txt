@@ -24,3 +24,4 @@ typing_extensions
 tzdata
 psycopg2
 whitenoise
+decouple
