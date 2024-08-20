@@ -16,18 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from home import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Titles for the backend platform
 admin.site.site_header = "Super secret Admin page"
 admin.site.site_title = "Back-end portal"
 
-# Connecting the admin file to the backend platform and the app folder
 urlpatterns = [
-    path('admin', admin.site.urls),  # Include the admin URL pattern here
-    path('', views.home, name='home'), 
-    path('submit', views.submit, name='submit'),
-    path('newsletter', views.newsletter_form, name='newsletter_form'),
-    path('generate-newsletter', views.generate_newsletter, name='generate_newsletter'),
-    path('subscribe', views.subscribe, name='subscribe'),
+    path('admin/', admin.site.urls),
+    path('', include('home.urls')),  # This includes all URLs from your home app
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

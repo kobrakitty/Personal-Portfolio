@@ -1,16 +1,13 @@
 from django.contrib import admin
-from .models import cardentry, Newsletter, Photo
+from .models import cardentry, Newsletter, gallery, project
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
 
 # Register your models here.
 admin.site.register(cardentry)
-admin.site.register(Photo)
-
-class PhotoAdmin(admin.ModelAdmin):
-    list_display = ['title', 'uploaded_at']
-    search_fields = ['title', 'description']
+admin.site.register(gallery)
+admin.site.register(project)
 
 def send_newsletter(modeladmin, request, queryset):
     for newsletter in queryset:
@@ -35,6 +32,4 @@ send_newsletter.short_description = "Send selected newsletters via email"
 class NewsletterAdmin(admin.ModelAdmin):
     list_display = ('topic', 'created_at')
     actions = [send_newsletter]
-
 admin.site.register(Newsletter, NewsletterAdmin)
-

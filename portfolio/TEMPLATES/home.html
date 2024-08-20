@@ -1,62 +1,47 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Glitter Pile AI - Personal Portfolio">
+    <meta name="author" content="Shelby">
     <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
 
     <title>Welcome to Glitter Pile AI!</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/album/album.css">
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/docs/4.0/examples/album/album.css" rel="stylesheet">
-
-    <!-- Custom dark mode styles -->
     <style>
         body {
             background-color: black;
             color: white;
         }
-
-        .bg-light {
-            background-color: black !important;
+        .bg-light, .bg-dark {
+            background-color: #111 !important;
         }
-
         .text-muted {
             color: #cccccc !important;
         }
-
         a {
             color: #00bfff;
         }
-
         .card {
-            background-color: #333333;
+            background-color: #333;
             color: white;
         }
-
         .jumbotron {
-            background-color: #000000;
+            background-color: #000;
             color: white;
         }
-
         .btn-primary {
             background-color: #00bfff;
             border-color: #00bfff;
         }
-
         .btn-secondary {
-            background-color: #555555;
-            border-color: #555555;
+            background-color: #555;
+            border-color: #555;
         }
-
         footer {
             background-color: black;
         }
@@ -79,7 +64,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="collapse bg-dark" id="navbarHeader">
             <div class="container">
@@ -91,8 +75,8 @@
                     <div class="col-sm-4 offset-md-1 py-4">
                         <h4 class="text-white">Socials</h4>
                         <ul class="list-unstyled">
-                            <li><a href="https://www.glitterpile.com" class="text-white">Shop</a></li>
-                            <li><a href="https://github.com/kobrakitty"class="text-white">GitHub</a></li>
+                            <li><a href="https://www.glitterpile.com" class="text-white">Store</a></li>
+                            <li><a href="https://github.com/kobrakitty" class="text-white">GitHub</a></li>
                             <li><a href="https://www.instagram.com/glitter_pile/" class="text-white">Instagram</a></li>
                             <li><a href="https://www.linkedin.com/in/shelby-w/" class="text-white">LinkedIn</a></li>
                         </ul>
@@ -103,7 +87,7 @@
         <div class="navbar navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
                 <a href="#" class="navbar-brand d-flex align-items-center">
-                    <strong>Glitter Pile AI</strong>
+                    <strong>Welcome to my portfolio!🐣</strong>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,29 +100,32 @@
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">🌟My Portfolio🌟</h1>
-                <p class="lead text-muted">🐱Hi, I’m Shelby🐱.</b>
-                    👽 I’m interested in everything AI and creating inclusive tech AI apps.</b>
-                    🌟 I’m currently learning in the Lonely Octopus Program.</b> 
-                    🌼Fun fact: I have four kitties and take care of wild possums in my backyard.</p>
-                <p>
+                <h1 class="jumbotron-heading">🌟Hello!🌟</h1>
+                <p class="lead text-muted">
+                    🐱I'm Shelby. I'm interested in AI and creating inclusive tech apps.🌟I'm currently learning in the Lonely Octopus Program.🐙Fun fact: I have 4 kitties and care for a family of racoons in my backyard.🦝
+                </p>
             </div>
         </section>
+
+        <!-- Card Entries Section -->
         <div class="album py-5 bg-light">
             <div class="container">
+                <h2>Explore🔎...</h2>
                 <div class="row">
                     {% for entry in entries %}
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="{{entry.featured_image}}" alt="Card image cap">
+                            {% if entry.featured_image %}
+                                <img class="card-img-top" src="{{ entry.featured_image.url }}" alt="{{ entry.title }}">
+                            {% endif %}
                             <div class="card-body">
-                                <h5>{{entry.title}}</h5>
-                                <p class="card-text">{{entry.description}}</p>
+                                <h5>{{ entry.title }}</h5>
+                                <p class="card-text">{{ entry.description }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary"><a target="_blank" href="{{entry.link}}">View</a></button>
+                                        <a href="{{ entry.link }}" target="_blank" class="btn btn-sm btn-outline-secondary">View</a>
                                     </div>
-                                    <small class="text-muted">{{entry.submit_date|date:"M d, Y"}}</small>
+                                    <small class="text-muted">{{ entry.submit_date|date:"M d, Y" }}</small>
                                 </div>
                             </div>
                         </div>
@@ -148,84 +135,39 @@
             </div>
         </div>
 
+        <!-- Gallery Section -->
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">🌟Glitter Pile AI Art🌟</h1>
-                <p class="lead text-muted">The following are a few samples of art I've generated using the ChatGPT4 DALL-E model based on my text prompts.</p>
+                <h1 class="jumbotron-heading">👽Glitter Pile AI Art👽</h1>
+                <p class="lead text-muted">Mini gallery of a few AI-generated images I created using text prompting and ChatGPT4o DALL-E.</p>
             </div>
         </section>
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="gallery">
-                    {% for photo in ai_art %}
-                    <div class="card">
-                        <img src="{{ photo.image.url }}" alt="{{ photo.title }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ photo.title }}</h5>
-                            <p class="card-text">{{ photo.description }}</p>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+        
+        {% include 'gallery.html' %}
 
-        <!-- Music Section -->
+        <!-- Project Section -->
         <section class="jumbotron text-center">
             <div class="container">
-                <h1 class="jumbotron-heading">🎵 Music 🎵</h1>
-                <p class="lead text-muted">Explore my musical journey and favorite tracks.</p>
+                <h1 class="jumbotron-heading">🐙Lonely Octopus Projects🐙</h1>
+                <p class="lead text-muted">A few projects completed in the Lonely Octopus Program. <i>GitHub repo links and more info coming soon!</i></p>
             </div>
         </section>
-        <div class="album py-5 bg-light">
-            <div class="container">
-                <div class="row">
-                    {% for track in music_tracks %}
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="{{ track.album_cover }}" alt="{{ track.title }} album cover">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ track.title }}</h5>
-                                <p class="card-text">{{ track.artist }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">
-                                            <a href="{{ track.listen_link }}" target="_blank">Listen</a>
-                                        </button>
-                                    </div>
-                                    <small class="text-muted">{{ track.release_date|date:"Y" }}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
+            
+        {% include 'project.html' %}
+        
     </main>
-
-</html>
-</main>
-
+    
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
                 <a href="#">Back to top</a>
             </p>
-            <p><i>Personal portfolio created by &copy;Glitter Pile LLC, 2024</i></p>
+            <p>Personal portfolio created by &copy;Glitter Pile LLC, 2024, using Django templates.  <i>Shout out to Ibraheem for four hours worth of courses...hiiiii!</i></p>
         </div>
     </footer>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/holder.min.js"></script>
 </body>
-
 </html>

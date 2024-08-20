@@ -1,27 +1,37 @@
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import cardentry, Newsletter, AIArtPhoto, MusicTrack
+from .models import cardentry, Newsletter, gallery, project
 from django.contrib import messages
-import os
 from django.conf import settings
 from openai import OpenAI
 from django.db import IntegrityError
+from openai import OpenAI
+import os
+from dotenv import load_dotenv
+
+# Set OpenAI API key
+#client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+OPENAI_API_KEY = "sk-proj-MdAO5GToPAILjmIPmqXFT3BlbkFJVKCK82et7F8JKc4ozqWF"
 
 # Create your views here
-
-#This will be my art gallery section
+#New card entries make sure there is a matching template
 def home(request):
+    card_entries = cardentry.objects.all().order_by('-submit_date')
+    # Fetch gallery entries from the gallery model
+    gallery_entries = gallery.objects.all().order_by('-submit_date')
+    project_entries = project.objects.all().order_by('-submit_date')
+
+    # Prepare the context with the model data
+    gallery_data = [{'url': entry.featured_image.url, 'title': entry.title, 'description': entry.description} for entry in gallery_entries]
+    project_data = [{'url': entry.featured_image.url, 'title': entry.title, 'description': entry.description} for entry in project_entries]
+    
     context = {
-        'ai_art': AIArtPhoto.objects.all(),
-        'music_tracks': MusicTrack.objects.all(),
+        'entries': card_entries,
+        'gallery_entries': gallery_data,
+        'project_entries': project_data
     }
-    return render(request, 'home.html', context)
-
-#This will be my card entries
-def home(request):
-    entries = cardentry.objects.all().order_by('-submit_date')
-    context = {'entries': entries}
+    
     return render(request, 'home.html', context)
 
 def subscribe(request):
@@ -49,16 +59,36 @@ def submit(request):
         link = request.POST['link']
         featured_image = None
 
+        if 'featured_image' in request.FILES:
+            featured_image = request.FILES['featured_image']
+        else:
+            pass
+
+        new_entry = cardentry(title=title, description=description, link=link, featured_image=featured_image)
+        new_entry.save()
+
+
+        return redirect('home')
+    else:
+        return render(request, 'submit.html', context)
+    
+def submit(request):
+    entries = gallery.objects.all().order_by('-submit_date')
+    context = {'entries': entries}
+
+    if request.method == "POST":
+        title = request.POST['title']
+        description = request.POST['description']
+        link = request.POST['link']
+        featured_image = None
 
         if 'featured_image' in request.FILES:
             featured_image = request.FILES['featured_image']
         else:
             pass
 
-
-        new_entry = cardentry(title=title, description=description, link=link, featured_image=featured_image)
+        new_entry = gallery(title=title, description=description, link=link, featured_image=featured_image)
         new_entry.save()
-
 
         return redirect('home')
     else:

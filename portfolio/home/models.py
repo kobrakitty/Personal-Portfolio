@@ -1,18 +1,6 @@
 # Create your models here.
 from django.db import models
 
-class AIArtPhoto(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='ai_art/')
-
-class MusicTrack(models.Model):
-    title = models.CharField(max_length=200)
-    artist = models.CharField(max_length=200)
-    album_cover = models.ImageField(upload_to='album_covers/')
-    listen_link = models.URLField()
-    release_date = models.DateField()
-
 class cardentry(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=False, blank=False)
@@ -26,12 +14,33 @@ class cardentry(models.Model):
     class Meta:
         verbose_name_plural = "card entries"
         ordering = ['-submit_date']
+        
+class gallery(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(null=False, blank=False)
+    link = models.TextField(null=False, blank=False)
+    featured_image = models.ImageField(upload_to='photos', null=True, blank=True)
+    submit_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title + " " + str(self.submit_date)
 
     class Meta:
-        verbose_name_plural = "card entries"
+        verbose_name_plural = "gallery"
+        ordering = ['-submit_date']
+        
+class project(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(null=False, blank=False)
+    link = models.TextField(null=False, blank=False)
+    featured_image = models.ImageField(upload_to='project', null=True, blank=True)
+    submit_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title + " " + str(self.submit_date)
+
+    class Meta:
+        verbose_name_plural = "project"
         ordering = ['-submit_date']
         
 class Newsletter(models.Model):
