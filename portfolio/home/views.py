@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import cardentry, Newsletter, gallery, project
 from django.contrib import messages
-from django.conf import settings
 from openai import OpenAI
 from django.db import IntegrityError
 from openai import OpenAI
@@ -11,7 +10,8 @@ import os
 from dotenv import load_dotenv
 
 # Set OpenAI API key
-client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+api_key = os.getenv('OPENAI_API_KEY')
+client = OpenAI(api_key=api_key)
 
 # Create your views here
 #New card entries make sure there is a matching template
@@ -99,11 +99,6 @@ def newsletter_form(request):
 def generate_newsletter(request):
     if request.method == 'POST':
         topic = request.POST.get('topic')
-        # Read the API key
-        api_key = settings.OPENAI_API_KEY
-
-        # Initialize the OpenAI client
-        client = OpenAI(api_key=api_key)
         messages = [
             {"role": "system", "content": "You are a newsletter writing whiz. You write brief, helpful newsletters about topics. Your newsletters are brief but insightful and often use lots of emojis. You always start the newsletter with Hello! and end you newsletter with Have a Great Day!"},
             {"role": "user", "content": f"Please write a detailed newsletter about {topic}."}
