@@ -38,8 +38,26 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # PostgreSQL Database
 DATABASES = {
-    'default': dj_database_url.config(default='DB_URL', conn_max_age=600)
+    'default': dj_database_url.config(
+        default=os.getenv('DB_URL'),
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
+# fallback in case DB_URL is not set; constucts on individual components
+if not os.getenv('DB_URL'):
+    DB_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DB_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+#previous version saving in case issues 082024 - 0234
+#DATABASES = {
+   # 'default': dj_database_url.config(default='DB_URL', conn_max_age=600)
+#}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/

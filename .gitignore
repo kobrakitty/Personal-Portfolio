@@ -1,3 +1,51 @@
-# SECRETS
+# SECRETS & Environment variables
 .env
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+env/
+venv/
+.venv/
+
+# Django
+*.log
+local_settings.py
 db.sqlite3
+db.sqlite3-journal
+
+# Media and static files - not sure if I should ignore yet
+#media/
+#static/
+
+# Secret key not applicable
+# secret_key.txt
+
+# Database
+#*.dump
+
+# VS Code
+#.vscode/
+
+# System files
+#.DS_Store
+#Thumbs.db
+
+# Test and coverage
+#.coverage
+#htmlcov/
+#.pytest_cache/
+#.mypy_cache/
+
+# Jupyter Notebooks
+#.ipynb_checkpoints
+
+# Other
+#*.bak
+#*.swp
+#*.swo
