@@ -22,7 +22,7 @@ def send_newsletter(modeladmin, request, queryset):
             body=html_content,
             from_email=settings.EMAIL_HOST_USER,
             to=[],
-            bcc=['shelbywentz@gmail.com', 'tyler.kd.knapp@gmail.com']  # Update this to the list of recipients
+            bcc=['shelbywentz@gmail.com']  # Update this to the list of recipients
         )
         email.content_subtype = 'html'  # This is required because we need to send HTML content
         email.send()
