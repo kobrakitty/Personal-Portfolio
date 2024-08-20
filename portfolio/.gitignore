@@ -1,2 +1,4 @@
 # SECRETS
 .env
+# Database
+db.sqlite3

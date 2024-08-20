@@ -20,3 +20,5 @@ sqlparse
 tqdm
 typing_extensions
 tzdata
+Django
+psycopg2
