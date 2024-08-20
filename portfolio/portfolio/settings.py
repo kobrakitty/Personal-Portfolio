@@ -23,7 +23,7 @@ load_dotenv(dotenv_path)
 # Django settings
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key')
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = ['https://glitterpileai.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['glitterpileai.onrender.com', 'localhost', '127.0.0.1']
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 # Quick-start development settings - unsuitable for production
