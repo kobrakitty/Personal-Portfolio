@@ -11,8 +11,7 @@ import os
 from dotenv import load_dotenv
 
 # Set OpenAI API key
-#client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-OPENAI_API_KEY = "sk-proj-MdAO5GToPAILjmIPmqXFT3BlbkFJVKCK82et7F8JKc4ozqWF"
+client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Create your views here
 #New card entries make sure there is a matching template
