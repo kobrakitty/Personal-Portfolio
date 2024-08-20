@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from dotenv import load_dotenv
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,14 +33,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 # PostgreSQL Database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST', 'localhost'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-    }
+    'default': dj_database_url.config(default='postgresql://glitterpile:cSEYYGx86MOD9muaM4QEimNgL94IaPSf@dpg-cr2an1aj1k6c73ekp0kg-a.oregon-postgres.render.com/glitterpileai', conn_max_age=600)
 }
 
 # Quick-start development settings - unsuitable for production
@@ -136,15 +130,32 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# This setting informs Django of the URI path from which your static files will be served to users
+# Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'portfolio' / 'staticfiles'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    BASE_DIR / 'portfolio' / 'static',
-    BASE_DIR / 'media' / 'static',
-]
 
+# This production code might break development mode, so we check whether we're in DEBUG mode
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+# old or duplicate code below; keeping in case Render doc doesn't work
+#STATIC_URL = '/static/'
+#STATIC_ROOT = BASE_DIR / 'portfolio' / 'staticfiles'
+#STATICFILES_DIRS = [
+   # BASE_DIR / 'static',
+   # BASE_DIR / 'portfolio' / 'static',
+   # BASE_DIR / 'media' / 'static',
+#]
+
+# Media processing
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
