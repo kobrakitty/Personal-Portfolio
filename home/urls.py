@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from home import views
-from django.shortcuts import render
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Titles for the backend platform
 admin.site.site_header = "⚠️Portfolio Admin Page⚠️"
@@ -15,3 +16,9 @@ urlpatterns = [
     path('generate-newsletter/', views.generate_newsletter, name='generate_newsletter'),
     path('subscribe/', views.subscribe, name='subscribe'),
 ]
+
+# Serve media files during development and production
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
