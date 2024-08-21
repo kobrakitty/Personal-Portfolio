@@ -15,6 +15,7 @@ urlpatterns = [
     path('newsletter/', views.newsletter_form, name='newsletter_form'),
     path('generate-newsletter/', views.generate_newsletter, name='generate_newsletter'),
     path('subscribe/', views.subscribe, name='subscribe'),
+
 ]
 
 # Serve media files during development and production

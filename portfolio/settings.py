@@ -155,13 +155,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-
 #New Version 8.21
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
+#Claude solution
+MEDIA_ROOT = '/opt/render/project/src/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media') uncomment if Claude doesn't work?
 
 # Tell Django to copy static assets into a path called `static` (this is specific to Render)
 #STATIC_URL = '/static/'
