@@ -155,13 +155,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Tell Django to copy static assets into a path called `static` (this is specific to Render)
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'static'
+
 # Media processing
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-# Tell Django to copy static assets into a path called `static` (this is specific to Render)
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR / 'Django Workshop' / 'static')
 
 # This setting informs Django of the URI path from which your static files will be served to users
 # Here, they well be accessible at your-domain.onrender.com/static/... or yourcustomdomain.com/static/...
