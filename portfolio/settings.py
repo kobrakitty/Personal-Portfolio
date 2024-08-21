@@ -63,7 +63,7 @@ if not os.getenv('DB_URL'):
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
 
 # Application definition
 
