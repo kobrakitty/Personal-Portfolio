@@ -17,18 +17,17 @@ client = OpenAI(api_key=api_key)
 #New card entries make sure there is a matching template
 def home(request):
     card_entries = cardentry.objects.all().order_by('-submit_date')
-    # Fetch gallery entries from the gallery model
     gallery_entries = gallery.objects.all().order_by('-submit_date')
     project_entries = project.objects.all().order_by('-submit_date')
 
     # Prepare the context with the model data
-    gallery_data = [{'url': entry.featured_image.url, 'title': entry.title, 'description': entry.description} for entry in gallery_entries]
-    project_data = [{'url': entry.featured_image.url, 'title': entry.title, 'description': entry.description} for entry in project_entries]
+    #gallery_data = [{'url': entry.featured_image.url, 'title': entry.title, 'description': entry.description} for entry in gallery_entries]
+    #project_data = [{'url': entry.featured_image.url, 'title': entry.title, 'description': entry.description} for entry in project_entries]
     
     context = {
         'entries': card_entries,
-        'gallery_entries': gallery_data,
-        'project_entries': project_data
+        'gallery_entries': gallery_entries,
+        'project_entries': project_entries
     }
     
     return render(request, 'home.html', context)
