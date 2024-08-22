@@ -35,7 +35,7 @@ class project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(null=False, blank=False)
     link = models.TextField(null=False, blank=False)
-    featured_image = models.ImageField(upload_to='uploads/project', null=True, blank=True)
+    featured_image = models.ImageField(upload_to='uploads/project/', null=True, blank=True)
     submit_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
