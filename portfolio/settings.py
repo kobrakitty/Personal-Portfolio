@@ -30,7 +30,9 @@ AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazo
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
 AWS_LOCATION = 'static'
 AWS_DEFAULT_ACL = 'public-read'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+#MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/' turning off to see if the direct link works better 
+MEDIA_URL = 'https://glitterpilebucket.s3.us-east-2.amazonaws.com/media/' 
+
 #MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/' savign this in case needed
 
 # Static and Media files config for PRODUCTION
