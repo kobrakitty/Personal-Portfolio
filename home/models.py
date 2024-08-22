@@ -1,5 +1,7 @@
 # Create your models here.
-from django.db import models
+from django.db import models 
+from django.conf import settings
+
 
 class cardentry(models.Model):
     title = models.CharField(max_length=200)
@@ -42,7 +44,12 @@ class project(models.Model):
     class Meta:
         verbose_name_plural = "project"
         ordering = ['-submit_date']
-        
+    
+    def get_image_url(self):
+        if self.featured_image:
+            return f"{settings.MEDIA_URL}{self.featured_image}"
+        return ""
+                
 class Newsletter(models.Model):
     email = models.EmailField(unique=True, default='useremail@example.com')
     topic = models.CharField(max_length=255)
