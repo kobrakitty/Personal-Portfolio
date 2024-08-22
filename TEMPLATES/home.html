@@ -116,7 +116,7 @@
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
                             {% if entry.featured_image %}
-                                <img class="card-img-top" src="{{ entry.featured_image.url }}" alt="{{ entry.title }}">
+                            <img src="{{ entry.featured_image.url }}" class="card-img-top" alt="{{ entry.title }}">
                             {% endif %}
                             <div class="card-body">
                                 <h5>{{ entry.title }}</h5>

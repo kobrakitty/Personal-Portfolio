@@ -4,7 +4,7 @@
             {% for entry in gallery_entries %}
             <div class="col-md-4">
                 <div class="card mb-4 box-shadow">
-                    <img class="card-img-top" src="{{ entry.featured_image.url }}" alt="{{ entry.title }}">
+                    <img src="{{ entry.featured_image.url }}" class="card-img-top" alt="{{ entry.title }}">
                     <div class="card-body text-center"> <!-- Added text-center class for centering the title -->
                         <h5>{{ entry.title }}</h5>
                         <h6 class="text-muted">{{ entry.description }}</h6> <!-- Subheader for the description -->

@@ -19,20 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-# Titles for the backend platform
-admin.site.site_header = "Super secret Admin page"
-admin.site.site_title = "Back-end portal"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')),  # This includes all URLs from your home app
+    path('', include('home.urls')),
+    # Remove or comment out the following line:
+    # path('portfolio/', include('portfolio.urls')),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-  
-#if settings.DEBUG:
-    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
