@@ -36,13 +36,13 @@ MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 # Static and Media files config for PRODUCTION
 # Use S3 for both static and media files in production
 STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') #added back due to failed deploy 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Local static and media serving for TESTING/DEV
 #STATIC_URL = '/static/'
 #MEDIA_ROOT = os.path.join(BASE_DIR, 'media') Turn off since using AWS3
-#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 #OpenAI key for the newsletter generation 
